@@ -9,7 +9,9 @@
         "nyholm/psr7-server": "^1.0",
         "guzzlehttp/psr7": "^2.4",
         "laminas/laminas-diactoros": "^2.17",
-        "squizlabs/php_codesniffer": "3.*"
+        "squizlabs/php_codesniffer": "3.*",
+        "twbs/bootstrap": "5.2.2",
+        "slim/php-view": "^3.2"
     },
     "[php]": {
         "editor.defaultFormatter": "wongjn.php-sniffer"
