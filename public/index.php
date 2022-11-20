@@ -14,8 +14,16 @@ $app->addErrorMiddleware(true, true, true);
 $app->get(
     '/', function (Request $request, Response $response) {
         $renderer = new PhpRenderer(__DIR__ . '/../templates');
-        return $renderer->render($response, 'main_page.phtml');
+        return $renderer->render($response, 'index.phtml');
     }
 );
+
+// $app->get(
+//     '/styles.css', function (Request $request, Response $response) {
+        
+//         $renderer = new PhpRenderer(__DIR__ . '/../css');
+//         return $renderer->render($response, 'styles.css');
+//     }
+// );
 
 $app->run();
