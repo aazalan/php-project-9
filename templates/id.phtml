@@ -9,7 +9,7 @@
 </head>
 
 <body class="min-vh-100 d-flex flex-column">
-<header class="flex-shrink-0">
+    <header class="flex-shrink-0">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark px-3">
             <a class="navbar-brand" href="/">Анализатор страниц</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Главная</a>
+                        <a class="nav-link" aria-current="page" href="/">Главная</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/urls">Сайты</a>
@@ -28,24 +28,46 @@
         </nav>
     </header>
 
+    <div class="alert alert-success" role="alert">Страница успешно добавлена</div>
+
     <main class="flex-grow-1">
         <div class="container-lg mt-3">
-            <h1></h1>
-            <div class="row">
-                <div class="col-12 col-md-10 col-lg-8 mx-auto border rounded-3 bg-light p-5">
-                    <h1 class="display-3">Анализатор страниц</h1>
-                    <p class="lead">Бесплатно проверяйте сайты на SEO пригодность</p>
-                    <form action="/" method="post" class="row" required>
-                        <div class="col-8">
-                            <input type="text" name="url[name]" value class="form-control form-control-lg is-invalid" placeholder="https://www.example.com">
-                        </div>
-                        <div class="invalid-feedback">Некорректный URL</div>
-                        <div class="col-2">
-                            <input type="submit" class="btn btn-primary btn-lg ms-3 px-5 text-uppercase mx-3" value="Проверить">
-                        </div>
-                    </form>
-                </div>
+            <h1>Сайт: </h1>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover text-nowrap" data-test="url">
+                    <tbody>
+                        <tr>
+                            <td>ID</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Имя</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Дата создания</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <h2 class="mt-5 mb-3">Проверки</h2>
+            <form method="post" action="/urls/{id}">
+                <input type="submit" class="btn btn-primary" value="Запустить проверку">
+            </form>
+            <table class="table table-bordered table-hover text-nowrap" data-test="url">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>Код ответа</th>
+                        <th>h1</th>
+                        <th>title</th>
+                        <th>description</th>
+                        <th>Дата создания</th>
+                    </tr>
+                    <!-- РЕЗУЛЬТАТ ПРОВЕРКИ -->
+                </tbody>
+            </table>
         </div>
     </main>
 

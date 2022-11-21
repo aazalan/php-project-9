@@ -18,12 +18,18 @@ $app->get(
     }
 );
 
-// $app->get(
-//     '/styles.css', function (Request $request, Response $response) {
-        
-//         $renderer = new PhpRenderer(__DIR__ . '/../css');
-//         return $renderer->render($response, 'styles.css');
-//     }
-// );
+$app->get(
+    '/urls', function (Request $request, Response $response) {
+        $renderer = new PhpRenderer(__DIR__ . '/../templates');
+        return $renderer->render($response, 'urls.phtml');
+    }
+);
+
+$app->get(
+    '/urls/{id}', function (Request $request, Response $response, $args) {
+        $renderer = new PhpRenderer(__DIR__ . '/../templates');
+        return $renderer->render($response, 'id.phtml');
+    }
+);
 
 $app->run();
