@@ -1,22 +1,17 @@
-CREATE TABLE urls (
-    id bigint  PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name varchar(255),
-    created_at timestamp
+CREATE TABLE Urls (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    name varchar(255) NOT NULL,
+    created_at TIMESTAMP,
+    UNIQUE (name)
 );
 
-CREATE TABLE url_checks (
-    id bigint  PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    url_id bigint REFERENCES urls (id),
-    status_code integer,
+CREATE TABLE Url_checks (
+    id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    url_id int,
+    status_code int,
     h1 varchar(255),
     title varchar(255),
     description varchar(255),
-    created_at timestamp
-);
-
-CREATE TABLE Urls (
-    id int NOT NULL AUTO_INCREMENT,
-    name varchar(255) NOT NULL,
     created_at TIMESTAMP,
-    PRIMARY KEY (ID)
+    FOREIGN KEY (url_id) REFERENCES Urls (id)
 );

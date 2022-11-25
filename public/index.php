@@ -29,8 +29,11 @@ $app->get(
 
 $app->get(
     '/urls/{id}', function (Request $request, Response $response, $args) {
+        $id = $args['id'];
+        $connection = new DataBase();
+        $params = $connection->getUrlDataFromBaseId($id);
         $renderer = new PhpRenderer(__DIR__ . '/../templates');
-        return $renderer->render($response, 'id.phtml');
+        return $renderer->render($response, 'id.phtml', $params);
     }
 );
 
@@ -40,10 +43,12 @@ $app->post(
 
         $connection = new DataBase();
         $connection->writeUrlToBase($url['name']);
-        $params = $connection->getUrlfromBase($url['name']);
+        $params = $connection->getUrlDataFromBase($url['name']);
+        $id = $params['id'];
 
-        $renderer = new PhpRenderer(__DIR__ . '/../templates');
-        return $renderer->render($response, 'id.phtml', $params);
+        return $response
+            ->withHeader('Location', '/urls/' . $id)
+            ->withStatus(302);
     }
 );
 
