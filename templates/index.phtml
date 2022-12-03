@@ -37,9 +37,13 @@
                     <p class="lead">Бесплатно проверяйте сайты на SEO пригодность</p>
                     <form action="/" method="post" class="row" required>
                         <div class="col-8">
-                            <input type="text" name="url[name]" value class="form-control form-control-lg is-invalid" placeholder="https://www.example.com">
+                            <?php if ($flash) :
+                                $atribute = 'is-invalid';
+                                $message = $flash['failed'][0];
+                            endif; ?>
+                            <input type="text" name="url[name]" value class="form-control form-control-lg  <?= $atribute ?>" placeholder="https://www.example.com">
+                            <div class="invalid-feedback"><?= $message ?></div>
                         </div>
-                        <div class="invalid-feedback">Некорректный URL</div>
                         <div class="col-2">
                             <input type="submit" class="btn btn-primary btn-lg ms-3 px-5 text-uppercase mx-3" value="Проверить">
                         </div>

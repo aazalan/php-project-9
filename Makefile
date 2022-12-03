@@ -6,7 +6,7 @@ install:
 	composer update
 
 dbrun:
-	sudo /etc/init.d/postgresql start
+	sudo /etc/init.d/mysql start
 
 start2:
 	php -S localhost:8080 -t public public/index.php
