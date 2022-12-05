@@ -41,9 +41,14 @@
                             <th>Последняя проверка</th>
                             <th>Код ответа</th>
                         </tr>
-                        <?php foreach ($urls as $url) : 
-                            
-                         endforeach; ?>
+                        <?php foreach ($urls as $url) : ?>
+                            <tr>
+                            <td><?= $url['id'] ?></td>
+                            <td><?= $url['name'] ?></td>
+                            <td><?= $url['created_at'] ?></td>
+                            <td><?= $url['status_code'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

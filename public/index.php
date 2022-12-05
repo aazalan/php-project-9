@@ -35,8 +35,8 @@ $app->get(
 $app->get(
     '/urls', function (Request $request, Response $response) {
         $connection = new DataBase();
-        //$urls = $connection->getAllUrls();
-        $params = ['urls' => ''];
+        $urls = $connection->getAllUrls();
+        $params = ['urls' => $urls];
         $renderer = new PhpRenderer(__DIR__ . '/../templates');
         return $renderer->render($response, 'urls.phtml', $params);
     }
