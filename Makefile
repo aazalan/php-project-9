@@ -13,3 +13,6 @@ start2:
 
 lint:
 	./vendor/bin/phpcs -h
+
+connect:
+	mysql -u root -p

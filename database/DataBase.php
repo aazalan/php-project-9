@@ -22,6 +22,22 @@ class DataBase
         ];
     }
 
+    private function doQuery($sql, $data, $isNeedToFetch = true)
+    {
+        $query = $this->connection->prepare($sql);
+        $query->execute($data);
+        if ($isNeedToFetch) {
+            return $query->fetchAll();
+        }
+    }
+
+    private function isInBase($name)
+    {
+        return $this->getUrlDataFromBaseByName($name);
+    }
+
+
+
     public function writeUrlToBase($name)
     {
         if ($this->isInBase($name)) {
@@ -29,65 +45,52 @@ class DataBase
         }
         $created_at = Carbon::now();
         $sql = 'INSERT INTO Urls (name, created_at) VALUES (:name, :created_at)';
-        $query = $this->connection->prepare($sql);
-        $query->execute(['name' => $name, 'created_at' => $created_at]);
+        $this->doQuery($sql, ['name' => $name, 'created_at' => $created_at], false);
         return $this->flashMessages['new'];
-    }
-
-    public function isInBase($name)
-    {
-        return $this->getUrlDataFromBaseByName($name);
     }
 
     public function getUrlDataFromBaseByName($name)
     {
         $sql = 'SELECT * FROM Urls WHERE name = :name';
-        $query = $this->connection->prepare($sql);
-        $query->execute(['name' => $name]);
-        $urlData = $query->fetch(PDO::FETCH_ASSOC);
-        return $urlData;
+        $urlData = $this->doQuery($sql, ['name' => $name]);
+        return $urlData[0];
     }
 
     public function getUrlDataFromBaseById($id)
     {
         $sql = 'SELECT * FROM Urls WHERE id = :id';
-        $query = $this->connection->prepare($sql);
-        $query->execute(['id' => $id]);
-        $urlData = $query->fetch(PDO::FETCH_ASSOC);
-        return $urlData;
+        $urlData = $this->doQuery($sql, ['id' => $id]);
+        return $urlData[0];
     }
 
     public function addCheck($id, $queryToUrl = null)
     {
         $created_at = Carbon::now();
-        $sql = 'INSERT INTO Url_checks (url_id, created_at) VALUES (:url_id, :created_at)';
-        $query = $this->connection->prepare($sql);
-        $query->execute(['url_id' => $id, 'created_at' => $created_at]);
+        $sql = 'INSERT INTO Url_checks 
+                (url_id, created_at) VALUES (:url_id, :created_at)';
+        $this->doQuery($sql, ['url_id' => $id, 'created_at' => $created_at], false);
     }
 
     public function getChecks($id)
     {
         $sql = 'SELECT * FROM Url_checks WHERE url_id = :url_id';
-        $query = $this->connection->prepare($sql);
-        $query->execute(['url_id' => $id]);
-        $checkData = $query->fetchAll();
+        $checkData = $this->doQuery($sql, ['url_id' => $id]);
         usort($checkData, fn($check1, $check2) => $check2['id'] <=> $check1['id']);
         return $checkData;
     }
 
     private function getCheckedData()
     {
-        $sql = 'SELECT status_code, url_id, MAX(created_at) FROM Url_checks GROUP BY url_id, status_code';
-        $query = $this->connection->query($sql);
-        $data = $query->fetchAll();
+        $sql = 'SELECT status_code, url_id, MAX(created_at) 
+                FROM Url_checks GROUP BY url_id, status_code';
+        $data = $this->doQuery($sql, []);
         return $data;
     }
 
     private function getUrlsData()
     {
         $sql = 'SELECT id, name FROM Urls';
-        $query = $this->connection->query($sql);
-        $data = $query->fetchAll();
+        $data = $this->doQuery($sql, []);
         return $data;
     }
 
