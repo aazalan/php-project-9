@@ -15,7 +15,9 @@
         "slim/flash": "^0.4.0",
         "nesbot/carbon": "^2.63",
         "php-di/php-di": "^6.4",
-        "vlucas/valitron": "^1.4"
+        "vlucas/valitron": "^1.4",
+        "guzzlehttp/guzzle": "^7.0",
+        "imangazaliev/didom": "^2.0"
     },
     "[php]": {
         "editor.defaultFormatter": "wongjn.php-sniffer"

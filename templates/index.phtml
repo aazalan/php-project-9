@@ -39,7 +39,7 @@
                         <div class="col-8">
                             <?php if ($flash) :
                                 $atribute = 'is-invalid';
-                                $message = $flash['failed'][0];
+                                $message = implode('', array_values($flash['failed']));
                             endif; ?>
                             <input type="text" name="url[name]" value class="form-control form-control-lg  <?= $atribute ?>" placeholder="https://www.example.com">
                             <div class="invalid-feedback"><?= $message ?></div>

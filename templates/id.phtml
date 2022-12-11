@@ -29,7 +29,7 @@
     </header>
 
     <?php if ($flash) : ?>
-    <div class="alert alert-success" role="alert"><?= $flash['success'][0]?></div>
+    <div class="alert alert-success" role="alert"><?= implode('', array_values($flash['success'])) ?></div>
     <?php endif ?>
 
     <main class="flex-grow-1">
@@ -70,10 +70,10 @@
                     <?php foreach ($checks as $check) : ?>
                         <tr>
                             <td><?= $check['id'] ?></td>
-                            <td></td>
-                            <td></td>
-                            <td></th>
-                            <td></td>
+                            <td><?= $check['status_code'] ?></td>
+                            <td><?= $check['h1'] ?></td>
+                            <td><?= $check['title'] ?></th>
+                            <td><?= $check['description'] ?></td>
                             <td><?= $check['created_at'] ?></td>
                         </tr>
                     <?php endforeach; ?>

@@ -36,8 +36,6 @@ class DataBase
         return $this->getUrlDataFromBaseByName($name);
     }
 
-
-
     public function writeUrlToBase($name)
     {
         if ($this->isInBase($name)) {
@@ -53,22 +51,30 @@ class DataBase
     {
         $sql = 'SELECT * FROM Urls WHERE name = :name';
         $urlData = $this->doQuery($sql, ['name' => $name]);
-        return $urlData[0];
+        return $urlData[array_key_first($urlData)];
     }
 
     public function getUrlDataFromBaseById($id)
     {
         $sql = 'SELECT * FROM Urls WHERE id = :id';
         $urlData = $this->doQuery($sql, ['id' => $id]);
-        return $urlData[0];
+        return $urlData[array_key_first($urlData)];
     }
 
-    public function addCheck($id, $queryToUrl = null)
+    public function addCheck($id, $check = null)
     {
         $created_at = Carbon::now();
-        $sql = 'INSERT INTO Url_checks 
-                (url_id, created_at) VALUES (:url_id, :created_at)';
-        $this->doQuery($sql, ['url_id' => $id, 'created_at' => $created_at], false);
+        $sql = 'INSERT INTO Url_checks (url_id, status_code, h1, title, description, created_at) 
+        VALUES (:url_id, :status_code, :h1, :title, :description, :created_at)';
+        $info = $check->getFullCheckInformation();
+        $title = $info['title'];
+        $this->doQuery($sql, [
+            'url_id' => $id,
+            'status_code' => $check->getStatusCode(),
+            'h1' => $info['h1'],
+            'title' => $title,
+            'description' => $info['description'],
+            'created_at' => $created_at,], false);
     }
 
     public function getChecks($id)
@@ -127,3 +133,7 @@ class DataBase
 //                 FROM Urls JOIN Url_checks ON Urls.id=Url_checks.url_id 
 //                 GROUP BY url_id, status_code
 
+
+// 'h1' => $info['h1'],
+//             'title' => $info['title'],
+//             'description' => $info['description'],

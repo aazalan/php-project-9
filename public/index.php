@@ -47,6 +47,9 @@ $app->get(
         $id = $args['id'];
         $connection = new DataBase();
         $params = $connection->getUrlDataFromBaseById($id);
+        $check = new Check($params['name']);
+        $info = $check->getFullCheckInformation();
+        print_r($info);
         $checks = $connection->getChecks($id);
         $messages = $this->get('flash')->getMessages();
         $params['flash'] = $messages;
@@ -86,7 +89,8 @@ $app->post(
     '/urls/{url_id}/checks', function (Request $request, Response $response, $args) {
         $id = $args['url_id'];
         $connection = new DataBase();
-        $check = new Check();
+        $url = $connection->getUrlDataFromBaseById($id);
+        $check = new Check($url['name']);
         $connection->addCheck($id, $check);
 
         return $response
