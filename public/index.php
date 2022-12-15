@@ -47,9 +47,11 @@ $app->get(
         $id = $args['id'];
         $connection = new DataBase();
         $params = $connection->getUrlDataFromBaseById($id);
-        $check = new Check($params['name']);
-        $info = $check->getFullCheckInformation();
-        print_r($info);
+
+        // $check = new Check($params['name']);
+        // $info = $check->getFullCheckInformation();
+        // print_r($info);
+
         $checks = $connection->getChecks($id);
         $messages = $this->get('flash')->getMessages();
         $params['flash'] = $messages;
@@ -91,7 +93,8 @@ $app->post(
         $connection = new DataBase();
         $url = $connection->getUrlDataFromBaseById($id);
         $check = new Check($url['name']);
-        $connection->addCheck($id, $check);
+        $message = $connection->addCheck($id, $check);
+        $this->get('flash')->addMessage('success', $message);
 
         return $response
                 ->withHeader('Location', '/urls/' . $id)

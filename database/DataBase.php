@@ -15,10 +15,11 @@ class DataBase
 
     public function __construct()
     {
-        $this->connection = new PDO('mysql:host=localhost;dbname=analyzer;', 'root', 'topi1409');
+        $this->connection = new PDO('mysql:host=127.0.0.1;dbname=analyzer;', 'root', 'topi1409');
         $this->flashMessages = [
             'existed' => 'Страница уже существует',
-            'new' => 'Страница успешно добавлена'
+            'new' => 'Страница успешно добавлена',
+            'newCheck' => 'Страница успешно проверена'
         ];
     }
 
@@ -75,6 +76,7 @@ class DataBase
             'title' => $title,
             'description' => $info['description'],
             'created_at' => $created_at,], false);
+        return $this->flashMessages['newCheck'];
     }
 
     public function getChecks($id)
