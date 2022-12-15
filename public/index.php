@@ -13,6 +13,12 @@ require __DIR__ . '/../vendor/autoload.php';
 
 session_start();
 
+if (!isset($_SESSION['newSession'])) {
+    $_SESSION['newSession'] = true;
+    $connection = new DataBase();
+    $connection->dropTables();
+}
+
 $container = new Container();
 
 $container->set('flash', function() {

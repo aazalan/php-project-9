@@ -127,6 +127,13 @@ class DataBase
 
         return $fullUrlsData;
     }
+
+    public function dropTables()
+    {
+        $this->connection->exec('DELETE FROM Url_checks');
+        $this->connection->exec('DELETE FROM Urls');
+
+    }
 }
 
 //SELECT status_code, url_id, MAX(created_at) FROM Url_checks GROUP BY url_id, status_code;
