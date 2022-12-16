@@ -15,7 +15,8 @@ class DataBase
 
     public function __construct()
     {
-        $this->connection = new PDO('mysql:host=127.0.0.1;dbname=analyzer;', 'root', 'topi1409');
+        //$this->connection = new PDO('mysql:host=127.0.0.1;dbname=analyzer;', 'root', 'topi1409');
+        $this->connection = new PDO('mysql:containers-us-west-134.railway.app;dbname=railway;', 'root', 'VGGNeJBPGpnKl7b4fc5Q');
         $this->flashMessages = [
             'existed' => 'Страница уже существует',
             'new' => 'Страница успешно добавлена',
@@ -132,17 +133,29 @@ class DataBase
     {
         $this->connection->exec('DELETE FROM Url_checks');
         $this->connection->exec('DELETE FROM Urls');
+    }
 
+    public function createTables()
+    {
+        $this->connection->exec('DROP TABLE Url_checks');
+        $this->connection->exec('DROP TABLE Urls');
+
+        $this->connection->exec('CREATE TABLE Urls (
+            id int PRIMARY KEY AUTO_INCREMENT,
+            name varchar(255) NOT NULL,
+            created_at TIMESTAMP,
+            UNIQUE (name)
+            )');
+
+        $this->connection->exec('CREATE TABLE Url_checks (
+            id int PRIMARY KEY NOT NULL AUTO_INCREMENT,
+            url_id int,
+            status_code int,
+            h1 varchar(255),
+            title varchar(255),
+            description varchar(255),
+            created_at TIMESTAMP,
+            FOREIGN KEY (url_id) REFERENCES Urls (id)
+        )');
     }
 }
-
-//SELECT status_code, url_id, MAX(created_at) FROM Url_checks GROUP BY url_id, status_code;
-
-// SELECT name, status_code, url_id, MAX(Url_checks.created_at)
-//                 FROM Urls JOIN Url_checks ON Urls.id=Url_checks.url_id 
-//                 GROUP BY url_id, status_code
-
-
-// 'h1' => $info['h1'],
-//             'title' => $info['title'],
-//             'description' => $info['description'],

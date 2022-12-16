@@ -16,7 +16,7 @@ session_start();
 if (!isset($_SESSION['newSession'])) {
     $_SESSION['newSession'] = true;
     $connection = new DataBase();
-    $connection->dropTables();
+    $connection->createTables();
 }
 
 $container = new Container();
