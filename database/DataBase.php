@@ -16,7 +16,7 @@ class DataBase
     public function __construct()
     {
         //$this->connection = new PDO('mysql:host=127.0.0.1;dbname=analyzer;', 'root', 'topi1409');
-        $this->connection = new PDO('mysql:containers-us-west-134.railway.app;dbname=railway;', 'root', 'VGGNeJBPGpnKl7b4fc5Q');
+        $this->connection = new PDO('mysql:dbname=railway;host=containers-us-west-134.railway.app', 'root', 'VGGNeJBPGpnKl7b4fc5Q');
         $this->flashMessages = [
             'existed' => 'Страница уже существует',
             'new' => 'Страница успешно добавлена',
