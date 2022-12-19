@@ -54,7 +54,6 @@ class DataBase
         $sql = 'SELECT * FROM Urls WHERE name = :name';
         $urlData = $this->doQuery($sql, ['name' => $name]);
         return $urlData[0];
-        //Warning: Undefined array key "" in /app/database/DataBase.php on line 56
     }
 
     public function getUrlDataFromBaseById($id)
@@ -109,7 +108,7 @@ class DataBase
         $checkedData = $this->getCheckedData();
         $urlsData = $this->getUrlsData();
         
-        print_r($urlsData);
+        //print_r($urlsData);
         $checksById = array_reduce($checkedData, function($arr, $url) {
             $arr[$url['url_id']] = [
                 'status_code' => $url['status_code'],

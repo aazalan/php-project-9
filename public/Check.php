@@ -26,17 +26,6 @@ class Check
         }
     }
 
-    private function normalizeDescription($description)
-    {
-        $htmlDoc = new \DOMDocument();
-        $htmlDoc->loadHTML($description);
-        $tags = $htmlDoc->getElementsByTagName('meta');
-        foreach($tags as $tag) {
-            $content = $tag->getAttribute('content');
-        }
-        return $content;
-    }
-
     public function getFullCheckInformation()
     {
         $h1HTML = $this->document->first('h1');
@@ -54,11 +43,11 @@ class Check
             $description = $descriptionHTML->content;
         }
 
-        $maxStrLengrth = 254;
+        $maxStrLength = 254;
         return [
-            'h1' => substr($h1, 0, $maxStrLengrth) ?? '', 
-            'title' => substr($title, 0, $maxStrLengrth) ?? '', 
-            'description' => substr($description, 0, $maxStrLengrth) ?? ''
+            'h1' => substr($h1, 0, $maxStrLength) ?? '', 
+            'title' => substr($title, 0, $maxStrLength) ?? '', 
+            'description' => substr($description, 0, $maxStrLength) ?? ''
         ];
     }
 
