@@ -53,14 +53,15 @@ class DataBase
     {
         $sql = 'SELECT * FROM Urls WHERE name = :name';
         $urlData = $this->doQuery($sql, ['name' => $name]);
-        return $urlData[array_key_first($urlData)];
+        return $urlData[0];
+        //Warning: Undefined array key "" in /app/database/DataBase.php on line 56
     }
 
     public function getUrlDataFromBaseById($id)
     {
         $sql = 'SELECT * FROM Urls WHERE id = :id';
         $urlData = $this->doQuery($sql, ['id' => $id]);
-        return $urlData[array_key_first($urlData)];
+        return $urlData[0];
     }
 
     public function addCheck($id, $check = null)
@@ -108,6 +109,7 @@ class DataBase
         $checkedData = $this->getCheckedData();
         $urlsData = $this->getUrlsData();
         
+        print_r($urlsData);
         $checksById = array_reduce($checkedData, function($arr, $url) {
             $arr[$url['url_id']] = [
                 'status_code' => $url['status_code'],
@@ -119,6 +121,7 @@ class DataBase
             $id = $url['id'];
             $arr[$id]['name'] = $url['name'];
             $arr[$id]['id'] = $url['id'];
+            //print_r($url);
             if ($checksById[$id]) {
                 $arr[$id]['status_code'] = $checksById[$id]['status_code'];
                 $arr[$id]['created_at'] = $checksById[$id]['created_at'];

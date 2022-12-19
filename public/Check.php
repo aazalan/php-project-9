@@ -11,6 +11,7 @@ class Check
 {
     private $client;
     private $response;
+    private $document;
     private $defaultHTML = "<body></body>";
 
     public function __construct($url)
@@ -55,9 +56,9 @@ class Check
 
         $maxStrLengrth = 254;
         return [
-            'h1' => substr($h1, 0, $maxStrLengrth), 
-            'title' => substr($title, 0, $maxStrLengrth), 
-            'description' => substr($description, 0, $maxStrLengrth)
+            'h1' => substr($h1, 0, $maxStrLengrth) ?? '', 
+            'title' => substr($title, 0, $maxStrLengrth) ?? '', 
+            'description' => substr($description, 0, $maxStrLengrth) ?? ''
         ];
     }
 
