@@ -11,6 +11,7 @@ use App\Check;
 
 require __DIR__ . '/../vendor/autoload.php';
 
+error_reporting(E_ALL ^ E_DEPRECATED);
 session_start();
 
 // if (!isset($_SESSION['newSession'])) {
