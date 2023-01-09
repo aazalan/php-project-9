@@ -12,11 +12,14 @@ class DataBase
 {
     private $connection;
     private $flashMessages;
+    private $dsn = 'mysql:host=containers-us-west-134.railway.app;port=7880;dbname=railway';
+    private $user = 'root';
+    private $password = 'VGGNeJBPGpnKl7b4fc5Q';
 
     public function __construct()
     {
-        //$this->connection = new PDO('mysql:host=127.0.0.1;dbname=analyzer;', 'root', 'topi1409');
-        $this->connection = new PDO('mysql:host=containers-us-west-134.railway.app;port=7880;dbname=railway', 'root', 'VGGNeJBPGpnKl7b4fc5Q');
+        $this->connection = new PDO('mysql:host=127.0.0.1;dbname=analyzer;', 'root', 'topi1409');
+        //$this->connection = new PDO($this->dsn, $this->user, $this->password);
         $this->flashMessages = [
             'existed' => 'Страница уже существует',
             'new' => 'Страница успешно добавлена',
@@ -108,7 +111,6 @@ class DataBase
         $checkedData = $this->getCheckedData();
         $urlsData = $this->getUrlsData();
         
-        //print_r($urlsData);
         $checksById = array_reduce($checkedData, function($arr, $url) {
             $arr[$url['url_id']] = [
                 'status_code' => $url['status_code'],
@@ -120,7 +122,6 @@ class DataBase
             $id = $url['id'];
             $arr[$id]['name'] = $url['name'];
             $arr[$id]['id'] = $url['id'];
-            //print_r($url);
             if ($checksById[$id]) {
                 $arr[$id]['status_code'] = $checksById[$id]['status_code'];
                 $arr[$id]['created_at'] = $checksById[$id]['created_at'];

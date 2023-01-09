@@ -25,7 +25,8 @@
       "autoload": {
         "psr-4": {
             "Model\\DataBase\\": "database/",
-            "App\\": "public/"
+            "App\\": "app/",
+            "App\\Controllers\\": "app/Controllers/"
         }
     }
 }
