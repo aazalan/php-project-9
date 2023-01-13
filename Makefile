@@ -4,6 +4,10 @@ start:
 
 install:
 	composer update
+	cp -n .env.railway .env
+
+install_local:
+	composer update
 	cp -n .env.example .env
 
 dbrun:
