@@ -15,11 +15,11 @@ require __DIR__ . '/../vendor/autoload.php';
 error_reporting(E_ALL ^ E_DEPRECATED);
 session_start();
 
-if (!isset($_SESSION['newSession'])) {
-    $_SESSION['newSession'] = true;
-    $connection = new DataBase();
-    $connection->createTables();
-}
+// if (!isset($_SESSION['newSession'])) {
+//     $_SESSION['newSession'] = true;
+//     $connection = new DataBase();
+//     $connection->createTables();
+// }
 
 $container = new Container();
 
