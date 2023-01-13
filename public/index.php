@@ -12,7 +12,8 @@ use App\Controllers\UrlCheckController;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-error_reporting(E_ALL ^ E_DEPRECATED);
+//error_reporting(E_ALL ^ E_DEPRECATED);
+error_reporting(E_COMPILE_ERROR | E_ERROR | E_CORE_ERROR);
 session_start();
 
 // if (!isset($_SESSION['newSession'])) {
