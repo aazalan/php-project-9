@@ -6,20 +6,19 @@ use Carbon\Carbon;
 use PDO;
 
 require __DIR__ . '/../vendor/autoload.php';
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
+$dotenv->load();
 
 
 class DataBase
 {
     private $connection;
     private $flashMessages;
-    private $dsn = 'mysql:host=containers-us-west-134.railway.app;port=7880;dbname=railway';
-    private $user = 'root';
-    private $password = 'VGGNeJBPGpnKl7b4fc5Q';
 
     public function __construct()
     {
-        $this->connection = new PDO('mysql:host=127.0.0.1;dbname=analyzer;', 'root', 'topi1409');
-        //$this->connection = new PDO($this->dsn, $this->user, $this->password);
+        $dsn = "mysql:host={$_ENV['MYSQLHOST']};port={$_ENV['MYSQLPORT']};dbname={$_ENV['MYSQLDATABASE']};";
+        $this->connection = new PDO($dsn, $_ENV['MYSQLUSER'], $_ENV['MYSQLPASSWORD']);
         $this->flashMessages = [
             'existed' => 'Страница уже существует',
             'new' => 'Страница успешно добавлена',

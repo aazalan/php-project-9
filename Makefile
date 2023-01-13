@@ -4,6 +4,7 @@ start:
 
 install:
 	composer update
+	cp -n .env.example .env
 
 dbrun:
 	sudo /etc/init.d/mysql start
