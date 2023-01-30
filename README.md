@@ -1,6 +1,6 @@
 # Page analyzer
 
-Page analyzer is application based on Slim framework. For SQL-queries in this project I used PDO extension. For building frontend interface I used Bootstrap. 
+Page analyzer is RESTful application based on Slim framework. For SQL-queries in this project I used PDO extension. For building frontend interface I used Bootstrap. 
 
 Page SEO-review provides by analyzing HTML code of the requesting page using DOM API and getting from the object certain elements.
 
